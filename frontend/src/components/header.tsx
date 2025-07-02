@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 import { Bell, UserCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { NotificationsPopover } from "@/components/notifications-popover";
+import { UserMenu } from "@/components/user-menu";
 
 const navItems = [
   { name: "Dashboard", href: "/" },
@@ -42,21 +44,10 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* User actions */}
+        {/* User actions */}      
         <div className="flex items-center gap-4">
-          {/* Notifications */}
-          <Button variant="ghost" size="icon" className="relative">
-            <Bell className="w-6 h-6" />
-            {/* Badge ejemplo */}
-            <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500 ring-2 ring-white" />
-          </Button>
-          {/* Avatar usuario */}
-          <Avatar>
-            <AvatarImage src="/avatar-placeholder.png" alt="@user" />
-            <AvatarFallback>
-              <UserCircle className="w-7 h-7 text-gray-400" />
-            </AvatarFallback>
-          </Avatar>
+          <NotificationsPopover />
+          <UserMenu />
         </div>
       </div>
     </header>
