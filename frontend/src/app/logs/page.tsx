@@ -6,18 +6,7 @@ import { LogCard } from "@/components/log-card";
 import { LogFilters } from "@/components/log-filters";
 import { LogListSkeleton } from "@/components/log-list-skeleton";
 import { Search } from "lucide-react";
-
-export type LogItem = {
-  id: string;
-  fileId: string;
-  fileName: string;
-  fileType: string;
-  process: string; 
-  status: "exito" | "fallo";
-  message: string;
-  createdAt: string;
-  details?: string; 
-};
+import type { LogItem } from "@/domain/logs/types";
 
 export default function LogsPage() {
   const [logs, setLogs] = useState<LogItem[]>([]);

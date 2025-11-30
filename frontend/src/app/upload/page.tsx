@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { UploadCloud, Image, Video, FileAudio, FileText, X, Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import clsx from "clsx";
+import { formatBytes } from "@/lib/format";
 
 const FILE_TYPES = [
   { label: "Imagen", value: "image/*", icon: <Image className="w-5 h-5" /> },
@@ -152,8 +153,4 @@ function FileIcon({ file }: { file: File }) {
 }
 
 // --- Formatear bytes a tamaño legible
-function formatBytes(bytes: number) {
-  if (bytes < 1024) return bytes + " B";
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
-  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
-}
+// formatting delegated to `src/lib/format.ts`

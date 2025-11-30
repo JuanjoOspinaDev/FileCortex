@@ -1,19 +1,20 @@
-import { FileItem } from "@/app/files/page";
+import type { FileItem } from "@/domain/files/types";
 import { Image, Video, FileText, FileAudio, Loader2, XCircle, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { formatBytes, formatDateYMD } from "@/lib/format";
 
 export function FileCard({ file }: { file: FileItem }) {
   return (
-    <div className="bg-white border rounded-2xl p-5 flex flex-col gap-3 shadow hover:shadow-lg transition group">
+    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-5 flex flex-col gap-3 shadow hover:shadow-lg transition group">
       <Link href={`/files/${file.id}`} className="flex flex-col items-center gap-3 cursor-pointer">
         <FilePreviewIcon file={file} />
-        <div className="font-semibold text-gray-800 text-center truncate w-full">{file.name}</div>
+        <div className="font-semibold text-gray-800 dark:text-gray-100 text-center truncate w-full">{file.name}</div>
       </Link>
-      <div className="flex items-center justify-between text-xs text-gray-500 mt-1">
-        <span>{formatBytes(file.size)}</span>
-        <span>{formatDate(file.createdAt)}</span>
-      </div>
+      <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mt-1">
+            <span>{formatBytes(file.size)}</span>
+            <span>{formatDateYMD(file.createdAt)}</span>
+          </div>
       <div className="flex items-center gap-2 mt-1">
         <StatusBadge status={file.status} />
         <span className="ml-auto capitalize text-xs">{getTypeLabel(file.type)}</span>
@@ -44,25 +45,25 @@ function FilePreviewIcon({ file }: { file: FileItem }) {
 function StatusBadge({ status }: { status: FileItem["status"] }) {
   if (status === "completado")
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 text-green-700 rounded-xl text-xs">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 rounded-xl text-xs">
         <CheckCircle className="w-4 h-4" /> Completado
       </span>
     );
   if (status === "procesando")
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 text-blue-700 rounded-xl text-xs animate-pulse">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 rounded-xl text-xs animate-pulse">
         <Loader2 className="w-4 h-4 animate-spin" /> Procesando
       </span>
     );
   if (status === "pendiente")
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-yellow-100 text-yellow-700 rounded-xl text-xs">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300 rounded-xl text-xs">
         <Loader2 className="w-4 h-4" /> Pendiente
       </span>
     );
   if (status === "fallido")
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-red-100 text-red-700 rounded-xl text-xs">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 rounded-xl text-xs">
         <XCircle className="w-4 h-4" /> Fallido
       </span>
     );
@@ -77,16 +78,4 @@ function getTypeLabel(type: string) {
   return "Archivo";
 }
 
-function formatBytes(bytes: number) {
-  if (bytes < 1024) return bytes + " B";
-  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
-  return (bytes / (1024 * 1024)).toFixed(1) + " MB";
-}
-
-function formatDate(iso: string) {
-  return new Date(iso).toLocaleDateString("es-ES", {
-    year: "2-digit",
-    month: "2-digit",
-    day: "2-digit",
-  });
-}
+// formatting delegated to `src/lib/format.ts`

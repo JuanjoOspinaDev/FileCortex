@@ -1,7 +1,8 @@
-import { LogItem } from "@/app/logs/page";
+import type { LogItem } from "@/domain/logs/types";
 import Link from "next/link";
 import { CheckCircle, XCircle, FileText, Image, Video, FileAudio, ChevronDown, ChevronUp, Zap } from "lucide-react";
 import { useState } from "react";
+import { formatDateTime } from "@/lib/format";
 
 export function LogCard({ log }: { log: LogItem }) {
   const [showDetails, setShowDetails] = useState(false);
@@ -77,12 +78,4 @@ function ProcessBadge({ process }: { process: string }) {
   );
 }
 
-function formatDateTime(iso: string) {
-  return new Date(iso).toLocaleString("es-ES", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-}
+// formatting delegated to `src/lib/format.ts`

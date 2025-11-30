@@ -7,16 +7,7 @@ import { FileCard } from "@/components/file-card";
 import { FilePlus, Search, Loader2, Filter } from "lucide-react";
 import { FileFilters } from "@/components/file-filters";
 import { FileListSkeleton } from "@/components/file-list-skeleton";
-
-export type FileItem = {
-  id: string;
-  name: string;
-  type: string;
-  size: number;
-  status: "pendiente" | "procesando" | "fallido" | "completado";
-  createdAt: string;
-  previewUrl: string;
-};
+import type { FileItem } from "@/domain/files/types";
 
 export default function FilesPage() {
   const [files, setFiles] = useState<FileItem[]>([]);

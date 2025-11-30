@@ -26,15 +26,15 @@ export function NotificationsPopover() {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-80 p-0">
-        <div className="px-4 py-2 border-b font-semibold text-gray-700">Notificaciones</div>
-        <ul className="max-h-64 overflow-y-auto divide-y">
+      <PopoverContent align="end" className="w-80 p-0 bg-white dark:bg-gray-900 border-gray-200 dark:border-gray-800">
+        <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 font-semibold text-gray-700 dark:text-gray-200">Notificaciones</div>
+        <ul className="max-h-64 overflow-y-auto divide-y divide-gray-200 dark:divide-gray-800">
           {notifications.length === 0 ? (
             <li className="px-4 py-6 text-gray-400 text-center">No hay notificaciones.</li>
           ) : (
             notifications.map(n => (
-              <li key={n.id} className="px-4 py-3 hover:bg-gray-50 transition">
-                <div className="text-sm text-gray-800">{n.message}</div>
+              <li key={n.id} className="px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition">
+                <div className="text-sm text-gray-800 dark:text-gray-100">{n.message}</div>
                 <div className="text-xs text-gray-400">{n.time}</div>
               </li>
             ))

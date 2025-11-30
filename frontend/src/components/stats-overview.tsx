@@ -13,11 +13,11 @@ export default function StatsOverview() {
       {stats.map((stat) => (
         <div
           key={stat.label}
-          className="bg-white border rounded-2xl p-5 flex flex-col items-center shadow transition hover:shadow-md"
+          className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-5 flex flex-col items-center shadow transition hover:shadow-md"
         >
-          <div className="mb-2 text-blue-600">{stat.icon}</div>
-          <div className="text-2xl font-bold">{stat.value}</div>
-          <div className="text-xs text-gray-500">{stat.label}</div>
+          <div className="mb-2 text-blue-600 dark:text-blue-400">{stat.icon}</div>
+          <div className="text-2xl font-bold text-gray-800 dark:text-gray-100">{stat.value}</div>
+          <div className="text-xs text-gray-500 dark:text-gray-400">{stat.label}</div>
         </div>
       ))}
     </section>
